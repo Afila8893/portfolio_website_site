@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NSS Campus Portal{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nss-logo {
+    width: 60px;           /* You can adjust to 50px or 70px if needed */
+    height: auto;
+    margin-right: 15px;
+    border-radius: 50%;    /* Optional: make it a circle */
+}
+
+/* Header container to align items horizontally */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Center text below the logo in mobile view */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+    }
+
+    .nss-logo {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+}
+
+        nav {
+            background-color: #343a40;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #495057;
+            transform: scale(1.1);
+        }
+
+        main section {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        main section h2 {
+            color: #1a023d;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        main section p {
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        footer {
+            background: #6c757d;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .hero {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(6, 5, 5);
+            text-shadow: 2px 2px 5px #1a023d;
+        }
+
+        .hero h4 {
+            font-size: 4rem;
+        }
+
+        .btn-primary {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            margin-top: 20px;
+        }
+
+        /* Carousel Styles */
+        .carousel {
+            position: relative;
+            border: 2px solid #ddd;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-inner img {
+            object-fit: cover;
+            max-height: 400px;
+        }
+
+        /* Carousel control buttons */
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-control-prev-icon:hover,
+        .carousel-control-next-icon:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%;
+            color: #fff;
+        }
+
+        /* Indicators below the carousel */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .carousel-indicators li {
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: #ddd;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-indicators .active {
+            background-color: #333;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .carousel-inner img {
+                max-height: 250px;
+            }
+
+            .carousel-control-prev-icon,
+            .carousel-control-next-icon {
+                width: 30px;
+                height: 30px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            main section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+        <img src="/static/images/images.jpeg" alt="NSS Logo" class="nss-logo">
+        <div class="header-text">
+            <h1>NSS Campus Portal</h1>
+            <p>Your gateway to community service and volunteering.</p>
+        </div>
+    </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'custom_admin_login' %}">Administrator</a></li>
+            <li><a href="{% url 'coordinator_login' %}">Co-ordinator</a></li>
+            <li><a href="{% url 'volunteer_login' %}">Volunteer</a></li>
+            <li><a href="{% url 'nss_page' %}">Students</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <section>
+            <h2>About the National Service Scheme</h2>
+            <p><b>The <span class="highlight">National Service Scheme (NSS)</span> is a student-centered program that complements education by linking academic learning with community service. Launched on <span class="highlight">September 24, 1969</span>, in honor of Mahatma Gandhi's birth centenary, NSS fosters the spirit of voluntary work among students and teachers through sustained community interaction.</b></p>
+        </section>
+
+        <!-- Carousel -->
+        <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/static/images/1st.jpg" class="d-block w-100" alt="Image 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="/static/images/2nd.jpg" class="d-block w-100" alt="Image 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="/static/images/3rd.jpg" class="d-block w-100" alt="Image 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- New Content Below Carousel -->
+   <section class="volunteer-opportunities py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4">Explore Volunteer Opportunities</h2>
+        <p class="text-center mb-5">Get involved in transformative projects that make a real difference. Pick your passion and become a change-maker!</p>
+        
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- Green Guardians -->
+            <div class="col">
+                <div class="card h-100 border-success">
+                    <div class="card-body">
+                        <h5 class="card-title text-success">🌱 Green Guardians</h5>
+                        <p class="card-text">Join our eco-warrior team in tree planting, clean-ups, and environmental education in schools and communities.</p>
+                        <a href="{% url 'green_guardians' %}" class="btn btn-outline-success">Join Campaign</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rural Health Ambassadors -->
+            <div class="col">
+                <div class="card h-100 border-danger">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">🩺 Rural Health Ambassadors</h5>
+                        <p class="card-text">Conduct free checkups, first-aid workshops, and mental health awareness sessions in underserved villages.</p>
+                        <a href="https://forms.gle/example-health-camp" target="_blank" class="btn btn-outline-danger">Volunteer Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Each One Teach One -->
+            <div class="col">
+                <div class="card h-100 border-primary">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">📚 Each One Teach One</h5>
+                        <p class="card-text">Help bridge the literacy gap by mentoring young learners in subjects like reading, math, and digital skills.</p>
+                        <a href="{% url 'each_one_teach_one' %}" class="btn btn-outline-primary">Start Teaching</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SkillUp Saturdays -->
+            <div class="col">
+                <div class="card h-100 border-info">
+                    <div class="card-body">
+                        <h5 class="card-title text-info">🛠️ SkillUp Saturdays</h5>
+                        <p class="card-text">Host skill-building workshops like sewing, coding, or basic repairs for local communities every weekend.</p>
+                        <a href="{% url 'skillup_saturdays' %}" class="btn btn-outline-info">Host a Session</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission Graam Upliftment -->
+            <div class="col">
+                <div class="card h-100 border-warning">
+                    <div class="card-body">
+                        <h5 class="card-title text-warning">🏡 Mission Graam Upliftment</h5>
+                        <p class="card-text">Spend a week in a rural area contributing to infrastructure improvement, sanitation, and education projects.</p>
+                        <a href="https://forms.gle/example-graam-camp" target="_blank" class="btn btn-outline-warning">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disaster Readiness Crew -->
+            <div class="col">
+                <div class="card h-100 border-dark">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark">🔥 Disaster Readiness Crew</h5>
+                        <p class="card-text">Train with professionals and lead mock drills to prepare communities for natural and man-made disasters.</p>
+                        <a href="{% url 'disaster_readiness' %}" class="btn btn-outline-dark">Get Trained</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+        <section class="testimonials py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">What Our Volunteers Say</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <blockquote class="blockquote text-center">
+                    <p class="mb-0">"The NSS program has been an eye-opening experience. It gave me the opportunity to help others and grow as an individual."</p>
+                </blockquote>
+            </div>
+            <div class="col-md-4">
+                <blockquote class="blockquote text-center">
+                    <p class="mb-0">"Volunteering through NSS has taught me the value of selfless service and community connection."</p>
+                </blockquote>
+            </div>
+            <div class="col-md-4">
+                <blockquote class="blockquote text-center">
+                    <p class="mb-0">"I never realized how fulfilling volunteering could be until I joined NSS. It's an experience I will never forget."</p>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <section class="latest-updates py-5 bg-white">
+    <div class="container">
+        <h2 class="text-center mb-5">Latest Updates</h2>
+        <div class="row">
+            <!-- Latest News -->
+            <div class="col-md-6 mb-4">
+                <h4 class="text-center text-primary">Latest News</h4>
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Date</th>
+                            <th>Headline</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>May 10, 2025</td>
+                            <td>NSS wins best social initiative award</td>
+                        </tr>
+                        <tr>
+                            <td>May 1, 2025</td>
+                            <td>Blood donation camp sees record turnout</td>
+                        </tr>
+                        <tr>
+                            <td>April 20, 2025</td>
+                            <td>New tree plantation drive launched</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Latest Events -->
+            <div class="col-md-6 mb-4">
+                <h4 class="text-center text-success">Upcoming Events</h4>
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Date</th>
+                            <th>Event</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>May 18, 2025</td>
+                            <td>Cleanliness Drive at Community Park</td>
+                        </tr>
+                        <tr>
+                            <td>May 25, 2025</td>
+                            <td>Health Camp for Rural Area</td>
+                        </tr>
+                        <tr>
+                            <td>June 1, 2025</td>
+                            <td>Workshop on Disaster Management</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="text-uppercase">About NSS Campus Portal</h5>
+                    <p>Your gateway to community service and volunteering through the National Service Scheme (NSS). We provide students with opportunities to engage in meaningful community work while enhancing their personal and academic growth.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="text-uppercase">Quick Links</h5>
+                    <ul class="list-unstyled">
+                         <li><a href="{% url 'homepage' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'services' %}">Services</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="text-uppercase">Connect With Us</h5>
+                    <ul class="list-unstyled d-flex">
+                        <li class="me-3">
+                            <a href="https://www.facebook.com/yourpage" class="text-white" target="_blank">
+                                <i class="fab fa-facebook-f"></i> Facebook
+                            </a>
+                        </li>
+                        <li class="me-3">
+                            <a href="https://twitter.com/yourprofile" class="text-white" target="_blank">
+                                <i class="fab fa-twitter"></i> Twitter
+                            </a>
+                        </li>
+                        <li class="me-3">
+                            <a href="https://www.instagram.com/yourprofile" class="text-white" target="_blank">
+                                <i class="fab fa-instagram"></i> Instagram
+                            </a>
+                        </li>
+                        <li class="me-3">
+                            <a href="https://www.linkedin.com/in/yourprofile" class="text-white" target="_blank">
+                                <i class="fab fa-linkedin-in"></i> LinkedIn
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-white">
+            <div class="row">
+                <div class="col text-center">
+                    <p>&copy; 2025 NSS Campus Portal. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0Dq0sdxH0s1+nQ5C5jW5q6Fvcg9fjo0J9mLMF31Vt2P5kFvL" crossorigin="anonymous"></script>
+</body>
+</html>

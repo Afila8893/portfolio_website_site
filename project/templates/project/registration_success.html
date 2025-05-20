@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Success</title>
+    <script>
+        window.onload = function() {
+            const message = document.getElementById("popup-message");
+            if (message) {
+                alert(message.innerText);
+            }
+        }
+    </script>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+            <div id="popup-message" style="display:none;">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h2>Thank you! Registration completed.</h2>
+    <a href="{% url 'homepage' %}">Back to Home</a>
+</body>
+</html>

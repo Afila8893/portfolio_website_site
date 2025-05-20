@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coordinator Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap 5 CSS and Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            font-family: 'Segoe UI', sans-serif;
+            margin-bottom: 80px;
+        }
+
+        .dashboard-header {
+            background: #28a745;
+            color: white;
+            padding: 60px 20px 40px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .dashboard-header p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .dashboard-container {
+            padding: 30px 15px;
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        .icon-card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 30px 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .icon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-card i {
+            font-size: 48px;
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .icon-card h5 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #ffffff;
+            border-top: 1px solid #dee2e6;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 65px;
+            z-index: 1000;
+        }
+
+        .nav-icon {
+            text-decoration: none;
+            color: #495057;
+            font-size: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .nav-icon small {
+            font-size: 11px;
+        }
+
+        .nav-icon:hover {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="dashboard-header">
+        <h1>Welcome to Coordinator Portal</h1>
+        <p class="lead">Hello, {{ coordinator.first_name }}!</p>
+    </div>
+
+    <!-- Main Content Block -->
+    <div class="dashboard-container">
+        {% block content %}
+        <!-- Example content layout (can be removed or replaced by extending pages) -->
+        <div class="row g-4">
+            <div class="col-6 col-md-3">
+                <div class="icon-card">
+                    <i class="bi bi-calendar-check-fill"></i>
+                    <h5>Attendance</h5>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="icon-card">
+                    <i class="bi bi-calendar-event"></i>
+                    <h5>Events</h5>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="icon-card">
+                    <i class="bi bi-bell-fill"></i>
+                    <h5>Notifications</h5>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="icon-card">
+                    <i class="bi bi-cash-stack"></i>
+                    <h5>Finance</h5>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="{% url 'attendance_tracker' %}" class="nav-icon">
+            <i class="bi bi-calendar-check"></i>
+            <small>Attendance</small>
+        </a>
+        <a href="{% url 'upload_event' %}" class="nav-icon">
+            <i class="bi bi-calendar-event"></i>
+            <small>Events</small>
+        </a>
+        <a href="{% url 'send_notification' %}" class="nav-icon">
+            <i class="bi bi-bell-fill"></i>
+            <small>Notify</small>
+        </a>
+        <a href="{% url 'financial_record' %}" class="nav-icon">
+            <i class="bi bi-cash-stack"></i>
+            <small>Finance</small>
+        </a>
+    </nav>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

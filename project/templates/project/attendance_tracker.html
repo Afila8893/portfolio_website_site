@@ -1,0 +1,83 @@
+{% extends 'project/coordinator_dashboard.html' %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center text-success font-weight-bold mb-4">
+            <i class="bi bi-person-check-fill mr-2"></i>NSS Attendance Tracker
+        </h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            <!-- Event Dropdown -->
+            <div class="form-group">
+                <label for="eventSelect" class="font-weight-bold">Select Event</label>
+                <select class="form-control" id="ev  <option value="1">Independents Day</option>
+                    <option value="2">Republic Day</option>
+                    <option value="3" >Gandhi Jayanthi</option>
+                    <option value="4">Childrens Day</option>
+                    <option value="5">Blood Donation Day/option>entSelect" name="event_id" required>
+                    <option value="" disabled selected>Select...</option>
+                  
+
+                    {% for event in events %}
+                        <option value="{{ event.id }}" {% if event.id == selected_event_id %}selected{% endif %}>
+                            {{ event.name }} - {{ event.date }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Student Info Inputs -->
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="studentId" class="font-weight-bold">Student ID</label>
+                    <input type="text" class="form-control" name="student_id" id="studentId" placeholder="Enter ID" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="studentName" class="font-weight-bold">Student Name</label>
+                    <input type="text" class="form-control" name="student_name" id="studentName" placeholder="Enter Name" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="attendance" class="font-weight-bold">Attendance</label>
+                    <select class="form-control" name="attendance" id="attendance" required>
+                        <option value="" disabled selected>Select...</option>
+                        <option value="Present">Present</option>
+                        <option value="Absent">Absent</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-block font-weight-bold mt-3">Submit Attendance</button>
+        </form>
+
+        {% if attendance_records %}
+        <div class="attendance-table mt-5">
+            <h5 class="text-success text-center font-weight-bold mb-3">Registered Student Attendance</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Event</th>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in attendance_records %}
+                            <tr>
+                                <td>{{ record.event.name }}</td>
+                                <td>{{ record.student_id }}</td>
+                                <td>{{ record.name }}</td>
+                                <td>{{ record.status }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

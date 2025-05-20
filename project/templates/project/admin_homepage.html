@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Homepage</title>
+
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        /* Header styling */
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Second header styling (for "NSS Admin Panel") */
+        .sub-header {
+            font-size: 24px;
+            color: #555;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* Styling the list of links */
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        li {
+            margin: 15px 0;
+        }
+
+        a {
+            font-size: 18px;
+            color: #3498db;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #ecf0f1;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #3498db;
+            color: white;
+        }
+
+        /* Adding a container to center everything */
+        .container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Main Header -->
+        <h1>Admin Home Page</h1>
+
+        <!-- Sub Header for the NSS Admin Panel -->
+        <h2 class="sub-header">NSS Admin Panel</h2>
+
+        <!-- List of Admin Actions -->
+        <ul>
+            <li><a href="{% url 'volunteer_registration' %}">Register Volunteer</a></li>
+            <li><a href="{% url 'register_coordinator' %}">Register Coordinator</a></li>
+
+        </ul>
+        
+    </div>
+</body>
+</html>
